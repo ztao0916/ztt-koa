@@ -9,7 +9,7 @@
     // 编译时生成相应的map文件
     "sourceMap": true,
     // 编译时指定输出文件夹,默认输出到ts文件所在的目录
-    "outDir": "./build",
+    "outDir": "./dist",
     // 指定输入文件根目录
     "rootDir": "./src",
     // 是否将编译后的文件注释删除
@@ -29,6 +29,7 @@
   },
   //要编译的文件路径
   "include": ["src/**/*"],
+  "files":["src/app.ts"],
   //要排除的文件路径
   "exclude": ["node_modules"]
 }
