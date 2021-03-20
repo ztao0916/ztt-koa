@@ -20,3 +20,26 @@
 typescript的装饰器该怎么理解呢? 仔细思考中...
 
 装饰器最为强大的功能之一是它能够反射元数据(reflect metadata)
+
+
+
+### 支持eslint
+
+参考路径: [eslint-tsc配置](https://github.com/AlloyTeam/eslint-config-alloy/blob/HEAD/README.zh-CN.md#typescript)
+
+```js
+npm install --save-dev eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-alloy
+```
+
+### 消除vscode配置的prettier影响
+
+在package.json文件中增加配置
+
+```js
+//含义表示: 按eslint来格式化代码
+"prettier": {
+    "eslintIntegration": true,
+    "semi": true
+  }
+```
+
