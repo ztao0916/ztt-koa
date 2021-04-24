@@ -13,6 +13,6 @@ export class ContainerLifeCycle {
     // bodyparser options see https://github.com/koajs/bodyparser
     this.app.use(bodyParser());
     //全局中间件
-    // this.app.use(await this.app.generateMiddleware('staticMiddleware'));
+    this.app.use(await this.app.generateMiddleware('staticMiddleware'));
   }
 }
