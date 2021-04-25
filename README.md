@@ -23,8 +23,11 @@ $ npm init midway -- --type=koa hello_koa
 │   ├── controller	# controller 接口的地方,处理service获取的数据,返回给前台
 │   └── service		# service 逻辑处理的地方,和数据库交互,返回数据
 │   └── middleware	# 中间件目录
+│   └── dto	# 参数校验
 │   └── public	# 静态资源
-│   ├── config  # 应用配置文件夹
+│   ├── entity  #实体（数据库 Model) 目录
+│   │   └── user.ts  #实体文件
+│   ├── config  # 应用配置文件夹[egg独有]
 │   │   └── config.default.ts # 应用配置文件
 │   ├── entity  # 实体（数据库 Model) 目录
 │   │   └── photo.ts # 实体文件
@@ -40,6 +43,16 @@ $ npm init midway -- --type=koa hello_koa
 | -------- | ------------------------------------------------------------ |
 | `@Query` | 取链接后面问号分隔的数据,例如 `www.baidu.com?a=1`,`query`是`{a:1}` |
 | `@Body`  | 正常的`post`请求,取`body`里面的数据                          |
+
+部署
+
+```js
+生产上部署的时候需要先 npm run build
+
+然后执行pm2 start bootstrap.js
+```
+
+
 
 ### 中间件的使用
 
@@ -179,6 +192,98 @@ export class UserController {
     //post请求按照官方文档来,打印下面语句报错,会有个错误:类型Request上不存在属性body,需要安装@types/koa-bodyparser
     console.log(this.ctx.request.body);
     return user;
+  }
+}
+```
+
+### 数据库
+
+#### `mongodb`
+
+```js
+#步骤一: 登录
+use admin
+db.auth(用户名,密码) //要在对应的数据库
+# 步骤二: 创建数据库
+use midway //创建midway数据库
+# 步骤三:授权
+db.createUser({user:"user01",pwd:"123456",roles:[{role:"readWrite",db:"stock"}]})
+# 步骤四: 重启
+
+# 常用操作
+#获取所有用户,admin数据库下
+db.system.users.find().pretty()
+#当前库的用户
+show users
+#修改当前库下的用户密码
+db.changeUserPassword('要更改的账户','重新更改的密码')
+#删除用户
+db.dropUser('要删除的账户')
+
+```
+
+执行命令
+
+```js
+npm i -s @midwayjs/typegoose @typegoose/typegoose 
+npm i -s mongoose 
+npm i -D @types/mongoose 													
+```
+
+引入
+
+```js
+// configuration.ts配置
+import * as typegoose from '@midwayjs/typegoose';
+
+imports: [typegoose]
+
+//config.default.ts配置
+import * as typegoose from '@midwayjs/typegoose';
+
+export const mongoose: typegoose.DefaultConfig = {
+  uri: 'mongodb+srv://cluster0.hy9wo.mongodb.net/',
+  options: { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true, 
+    dbName: '***********',
+    user: '***********', 
+    pass: '***********' 
+  }
+}
+```
+
+#### `mysql`
+
+
+
+### 加载公共配置
+
+安装`jsonwebtoken`,`koa-jwt`,`@types/jsonwebtoken`
+
+设置`secretKey`,是常量,放在`config.default.ts`文件中
+
+在`src/configuration.ts`配置目录加载`config.default.ts`
+
+```js
+import { Configuration, App } from '@midwayjs/decorator';
+import { Application } from '@midwayjs/koa';
+import { join } from 'path';
+import * as bodyParser from 'koa-bodyparser';
+
+@Configuration({
+  conflictCheck: true,
+  importConfigs: [join(__dirname, './config/')],
+})
+export class ContainerLifeCycle {
+  @App()
+  app: Application;
+
+  async onReady() {
+    // bodyparser options see https://github.com/koajs/bodyparser
+    this.app.use(bodyParser());
+    //全局中间件
+    this.app.use(await this.app.generateMiddleware('staticMiddleware'));
   }
 }
 ```

@@ -8,15 +8,22 @@
     "@midwayjs/core": "^2.3.0",
     "@midwayjs/decorator": "^2.3.0",
     "@midwayjs/koa": "^2.3.0",
+    "@midwayjs/typegoose": "^2.10.10",
+    "@typegoose/typegoose": "^7.6.0",
+    "jsonwebtoken": "^8.5.1",
     "koa-bodyparser": "^4.3.0",
-    "koa-static": "^5.0.0"
+    "koa-jwt": "^4.0.1",
+    "koa-static": "^5.0.0",
+    "mongoose": "5.10.5"
   },
   "devDependencies": {
     "@midwayjs/cli": "^1.0.0",
     "@midwayjs/luckyeye": "^1.0.0",
     "@midwayjs/mock": "^2.3.0",
     "@types/jest": "^26.0.10",
+    "@types/jsonwebtoken": "^8.5.1",
     "@types/koa-bodyparser": "^4.3.0",
+    "@types/mongoose": "^5.10.5",
     "@types/node": "14",
     "cross-env": "^6.0.0",
     "jest": "^26.4.0",
