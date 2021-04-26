@@ -16,5 +16,5 @@ export class RegistryDTO {
   pwd: string;
 
   @Rule(RuleType.string().required())
-  confirmPwd: string;
+  confirm_pwd: string;
 }

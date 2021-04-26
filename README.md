@@ -196,9 +196,9 @@ export class UserController {
 }
 ```
 
-### 数据库
+### 数据库`mongodb`
 
-#### `mongodb`
+数据库相关命令
 
 ```js
 #步骤一: 登录
@@ -207,7 +207,11 @@ db.auth(用户名,密码) //要在对应的数据库
 # 步骤二: 创建数据库
 use midway //创建midway数据库
 # 步骤三:授权
+# 根权限
+db.createUser({user:"user01",pwd:"123456",roles:[{role:"root",db:"admin"}]})
+# 读写权限
 db.createUser({user:"user01",pwd:"123456",roles:[{role:"readWrite",db:"stock"}]})
+db.createUser({user:"midway",pwd:"midway_pwd_123456",roles:[{role:"readWrite",db:"midway"}]})
 # 步骤四: 重启
 
 # 常用操作
@@ -222,7 +226,7 @@ db.dropUser('要删除的账户')
 
 ```
 
-执行命令
+安装插件
 
 ```js
 npm i -s @midwayjs/typegoose @typegoose/typegoose 
@@ -253,7 +257,15 @@ export const mongoose: typegoose.DefaultConfig = {
 }
 ```
 
-#### `mysql`
+大致的书写逻辑
+
+```js
+# 首先: entity文件夹 定义一个文档模型,相当于mongoose.schema
+
+# 然后: service文件夹里面执行文档的CRUD,同时返回操作结果
+
+# 最后: controller文件夹里面执行数据操作[进行字段的校验,必填之类的]
+```
 
 
 

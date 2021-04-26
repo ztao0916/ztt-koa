@@ -9,8 +9,9 @@ import {
   Validate,
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/koa';
-import * as jwt from 'jsonwebtoken';
+// import * as jwt from 'jsonwebtoken';
 import { LoginDTO, RegistryDTO } from '../dto/user';
+import { UserService } from '../service/user';
 
 @Provide()
 @Controller('/api/user')
@@ -21,20 +22,20 @@ export class UserController {
   @Config('secretKey')
   secret;
 
+  @Inject()
+  userService: UserService;
+
   @Post('/registry')
   @Validate()
   async register(@Body(ALL) user: RegistryDTO) {
-    return user;
+    const registerUser = await this.userService.register(user);
+    return registerUser;
   }
 
   @Post('/login')
   @Validate()
   async login(@Body(ALL) user: LoginDTO) {
-    const { key } = this.secret;
-    const { name, pwd } = user;
-    console.log(name, pwd);
-    return {
-      token: jwt.sign({ name, pwd }, key),
-    };
+    const loginUser = await this.userService.login(user);
+    return loginUser;
   }
 }
