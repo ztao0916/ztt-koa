@@ -11,7 +11,7 @@ export class APIController {
   @Inject()
   userService: UserService;
 
-  @Post('/get_user', { middleware: ['reportMiddleware'] })
+  @Post('/get_user')
   async postUser(@Body() uid) {
     const user = await this.userService.getUser({ uid });
     return { success: true, message: 'OK', data: user };

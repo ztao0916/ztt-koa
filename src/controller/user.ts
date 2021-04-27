@@ -9,7 +9,6 @@ import {
   Validate,
 } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/koa';
-// import * as jwt from 'jsonwebtoken';
 import { LoginDTO, RegistryDTO } from '../dto/user';
 import { UserService } from '../service/user';
 

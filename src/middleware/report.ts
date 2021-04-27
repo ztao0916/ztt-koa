@@ -6,7 +6,7 @@ import {
 } from '@midwayjs/koa';
 
 @Provide()
-export class ReportMiddleware implements IWebMiddleware {
+export class reportMiddleware implements IWebMiddleware {
   resolve() {
     return async (ctx: IMidwayKoaContext, next: IMidwayKoaNext) => {
       const startTime = Date.now();
