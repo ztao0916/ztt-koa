@@ -64,9 +64,9 @@ export class dataHandleMiddleware implements IWebMiddleware {
             break;
         }
       } catch (error) {
-        console.log(error);
         ctx.body = {
-          msg: error || error.message,
+          code: 999,
+          msg: error.message,
         };
       }
     };

@@ -11,6 +11,4 @@ export const mongoose: typegoose.DefaultConfig = {
   },
 };
 
-export const secretKey = {
-  key: 'secret',
-};
+export const secretKey = 'secretKey';
