@@ -23,5 +23,7 @@ export class ContainerLifeCycle implements ILifeCycle {
     this.app.use(await this.app.generateMiddleware('reportMiddleware'));
     ////全局中间件(统一返回数据结构)
     this.app.use(await this.app.generateMiddleware('dataHandleMiddleware'));
+    //全局中间件(统一路由权限)
+    this.app.use(await this.app.generateMiddleware('koajwtMiddleware'));
   }
 }

@@ -278,6 +278,7 @@ export const mongoose: typegoose.DefaultConfig = {
 在`src/configuration.ts`配置目录加载`config.default.ts`
 
 ```js
+//configuration.ts
 import { Configuration, App } from '@midwayjs/decorator';
 import { Application } from '@midwayjs/koa';
 import { join } from 'path';
@@ -285,7 +286,7 @@ import * as bodyParser from 'koa-bodyparser';
 
 @Configuration({
   conflictCheck: true,
-  importConfigs: [join(__dirname, './config/')],
+  importConfigs: [join(__dirname, './config/')], //引入config文件夹下的内容全局使用
 })
 export class ContainerLifeCycle {
   @App()
@@ -296,6 +297,19 @@ export class ContainerLifeCycle {
     this.app.use(bodyParser());
     //全局中间件
     this.app.use(await this.app.generateMiddleware('staticMiddleware'));
+  }
+}
+//使用config.default.ts中定义的变量/函数/对象
+import { Provide, Config } from '@midwayjs/decorator';
+
+@Provide()
+export class UserService {
+  @Config('secretKey')
+  secret;
+    
+  async getUser() {
+    console.log(this.secret) //这个secret就是config.default.ts下的secretKey
+    return 1;
   }
 }
 ```

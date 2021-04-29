@@ -10,11 +10,13 @@
     "@midwayjs/koa": "^2.3.0",
     "@midwayjs/typegoose": "^2.10.10",
     "@typegoose/typegoose": "^7.6.0",
+    "argon2": "^0.27.2",
     "jsonwebtoken": "^8.5.1",
     "koa-bodyparser": "^4.3.0",
     "koa-jwt": "^4.0.1",
     "koa-static": "^5.0.0",
-    "mongoose": "5.10.5"
+    "mongoose": "5.10.5",
+    "node-gyp": "^8.0.0"
   },
   "devDependencies": {
     "@midwayjs/cli": "^1.0.0",

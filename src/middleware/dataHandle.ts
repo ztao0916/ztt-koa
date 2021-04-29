@@ -11,20 +11,19 @@ export class dataHandleMiddleware implements IWebMiddleware {
     return async (ctx: IMidwayKoaContext, next: IMidwayKoaNext) => {
       try {
         await next();
-        switch (ctx.status) {
-          case 200:
-            // 请求成功
-            ctx.body = {
-              code: 200,
-              msg: ctx.message,
-              data: ctx.body,
-            };
-            break;
+        // 请求成功
+        ctx.body = {
+          code: 200,
+          msg: ctx.message,
+          data: ctx.body,
+        };
+      } catch (error) {
+        switch (error.status) {
           case 401:
             // 401表示没有授权token
             ctx.body = {
               code: 401,
-              msg: '请重新重新登录',
+              msg: '请登录',
             };
             break;
           case 403:
@@ -63,11 +62,6 @@ export class dataHandleMiddleware implements IWebMiddleware {
             };
             break;
         }
-      } catch (error) {
-        ctx.body = {
-          code: 999,
-          msg: error.message,
-        };
       }
     };
   }

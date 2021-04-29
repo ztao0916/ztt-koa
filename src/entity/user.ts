@@ -7,9 +7,13 @@ export class User {
   @prop({ required: true })
   public pwd: string;
 
-  @prop()
-  public confirm_pwd?: string;
-
-  @prop({ type: () => [String] })
+  @prop({ type: () => [String], default: ['泥瓦工'] })
   public jobs?: string[];
+
+  public get password() {
+    return `${this.pwd}`;
+  }
+  public set password(pass) {
+    this.pwd = pass;
+  }
 }
