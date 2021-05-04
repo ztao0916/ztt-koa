@@ -196,64 +196,9 @@ export class UserController {
 }
 ```
 
-### 数据库
+### 数据库`mysql`
 
-#### `mongodb`
-
-```js
-#步骤一: 登录
-use admin
-db.auth(用户名,密码) //要在对应的数据库
-# 步骤二: 创建数据库
-use midway //创建midway数据库
-# 步骤三:授权
-db.createUser({user:"user01",pwd:"123456",roles:[{role:"readWrite",db:"stock"}]})
-# 步骤四: 重启
-
-# 常用操作
-#获取所有用户,admin数据库下
-db.system.users.find().pretty()
-#当前库的用户
-show users
-#修改当前库下的用户密码
-db.changeUserPassword('要更改的账户','重新更改的密码')
-#删除用户
-db.dropUser('要删除的账户')
-
-```
-
-执行命令
-
-```js
-npm i -s @midwayjs/typegoose @typegoose/typegoose 
-npm i -s mongoose 
-npm i -D @types/mongoose 													
-```
-
-引入
-
-```js
-// configuration.ts配置
-import * as typegoose from '@midwayjs/typegoose';
-
-imports: [typegoose]
-
-//config.default.ts配置
-import * as typegoose from '@midwayjs/typegoose';
-
-export const mongoose: typegoose.DefaultConfig = {
-  uri: 'mongodb+srv://cluster0.hy9wo.mongodb.net/',
-  options: { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true, 
-    dbName: '***********',
-    user: '***********', 
-    pass: '***********' 
-  }
-}
-```
-
-#### `mysql`
+#### 
 
 
 
