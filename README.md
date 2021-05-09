@@ -1,4 +1,4 @@
-# 我的midway使用心得
+# midway-mysql
 
 记录自己`midway`使用过程中的问题与收获,官方文档:[传送门](https://www.yuque.com/midwayjs/midway_v2/koa)
 
@@ -198,7 +198,20 @@ export class UserController {
 
 ### 数据库`mysql`
 
-#### 
+ 看文档:[传送门](https://www.yuque.com/midwayjs/midway_v2/orm)
+
+和原生的`typeorm`有不小的区别,要理清楚
+
+#### 区别
+
+1. 每个实体必须至少具有一个主键列
+
+| 差异       | `@midwayjs/orm`                          | `typeorm`                |
+| ---------- | ---------------------------------------- | ------------------------ |
+| 实体模型类 | `EntityModel(表名:和类名称不一致时设置)` | `Entity`                 |
+| 属性列     | `@Column()`                              | `@Column()`              |
+| 主键列     |                                          | `PrimaryColumn`          |
+| 自增主键列 |                                          | `PrimaryGeneratedColumn` |
 
 
 
@@ -234,4 +247,8 @@ export class ContainerLifeCycle {
 ```
 
 
+
+### swagger
+
+按照文档来即可,注意一点: 使用`127.0.0.1/swagger-ui/index.html#/`是无效的,要使用本机`IP`
 

@@ -1,7 +1,8 @@
 import { EntityModel } from '@midwayjs/orm';
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@EntityModel('photo')
+// 数据库名称: photo
+@EntityModel()
 export class Photo {
   @PrimaryGeneratedColumn()
   id: number;
