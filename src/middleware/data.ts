@@ -12,9 +12,8 @@ export class dataMiddleware implements IWebMiddleware {
       try {
         await next();
         // 请求成功
-        const reg = /swagger/;
-
-        if (!ctx.url.match(reg).length) {
+        const isSwagger = ctx.url.match(/swagger/) ? true : false;
+        if (!isSwagger) {
           ctx.body = {
             code: 200,
             msg: ctx.message,
