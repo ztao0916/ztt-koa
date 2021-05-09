@@ -1,4 +1,6 @@
-# 我的midway使用心得
+# midway-mongodb
+
+这个只做参考,基本上不使用
 
 记录自己`midway`使用过程中的问题与收获,官方文档:[传送门](https://www.yuque.com/midwayjs/midway_v2/koa)
 
